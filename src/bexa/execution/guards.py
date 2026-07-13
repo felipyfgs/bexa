@@ -52,8 +52,12 @@ def assert_can_execute(client: EbinexClient, settings: Settings, intent: TradeIn
 
     # Corte de entrada da UI Ebinex (M1: a partir do s:55 CALL/PUT somem).
     broker = client.get_broker_time()
-    clock = broker.value if broker is not None else datetime.now(UTC)
-    window = entry_window(intent.timeframe, now=clock)
+    clock: datetime | None = None
+    if broker is not None:
+        value = getattr(broker, "value", None)
+        if isinstance(value, datetime):
+            clock = value
+    window = entry_window(intent.timeframe, now=clock or datetime.now(UTC))
     if not window.open:
         raise ExecutionGuardError(window.reason)
 

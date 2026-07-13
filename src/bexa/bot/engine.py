@@ -20,6 +20,7 @@ from bexa.connection.session import Session, open_session
 from bexa.core.exceptions import BexaError, ExecutionGuardError, RiskLimitError
 from bexa.core.logging import get_logger
 from bexa.execution.models import TradeIntent
+from bexa.execution.timing import entry_window
 from bexa.market.service import history_lookback_minutes, parse_timeframe
 from bexa.risk.models import RiskDecision
 from bexa.risk.service import RiskService

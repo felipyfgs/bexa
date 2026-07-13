@@ -1,5 +1,6 @@
 """Testes unitários dos gates de execução (sem rede)."""
 
+from datetime import UTC, datetime
 from decimal import Decimal
 from types import SimpleNamespace
 from unittest.mock import MagicMock
@@ -35,6 +36,10 @@ def _client(*, env: AccountEnvironment, allow_real: bool, connected: bool = True
     client.connected = connected
     client.config.allow_real_trading = allow_real
     client.accounts.selected = SimpleNamespace(environment=env, id="acc-1")
+    # Relógio fixo no segundo 10 da vela M1 (janela de entrada aberta).
+    client.get_broker_time.return_value = SimpleNamespace(
+        value=datetime(2026, 7, 13, 12, 0, 10, tzinfo=UTC)
+    )
     return client
 
 
@@ -113,3 +118,14 @@ def test_as_money() -> None:
     assert as_money(Decimal("1.5")) == Decimal("1.5")
     assert as_money("2.0") == Decimal("2.0")
     assert as_money(3) == Decimal("3")
+
+
+def test_blocks_after_entry_cutoff() -> None:
+    client = _client(env=AccountEnvironment.TEST, allow_real=False)
+    # Segundo 55: janela fechada na Ebinex
+    client.get_broker_time.return_value = SimpleNamespace(
+        value=datetime(2026, 7, 13, 12, 0, 55, tzinfo=UTC)
+    )
+    with pytest.raises(ExecutionGuardError, match="janela de entrada fechada"):
+        assert_can_execute(client, _settings(), _intent())
+
