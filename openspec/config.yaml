@@ -1,0 +1,24 @@
+schema: spec-driven
+
+context: |
+  Projeto: bexa — app Python sobre ebinexpy para operar a Ebinex.
+  Idioma: pt-BR para respostas ao usuário e artefatos OpenSpec.
+  Stack: Python 3.11+, hatchling, pytest, ruff, dependência ebinexpy.
+  Layout: src/bexa/<feature>/ (core, connection, accounts, market, orders, execution, strategy, risk, bot).
+  Conta padrão: TEST. REAL só com opt-in explícito (BEXA_ALLOW_REAL_TRADING + ClientConfig.allow_real_trading).
+  Robô: bexa run (dry-run default; --live envia). Config mínima no .env (email/senha). Defaults no código.
+  Não reimplementar protocolo Ebinex; estender features em src/bexa e reutilizar EbinexClient.
+
+rules:
+  proposal:
+    - Escrever em pt-BR
+    - Incluir seção de Não-objetivos
+    - Deixar explícito impacto em TEST vs REAL
+  design:
+    - Escrever em pt-BR
+    - Preferir módulos por feature em src/bexa/
+  tasks:
+    - Escrever em pt-BR
+    - Quebrar tarefas em passos verificáveis (teste/lint quando couber)
+  specs:
+    - Escrever requisitos e cenários em pt-BR

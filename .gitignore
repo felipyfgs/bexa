@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+wheels/
+pip-wheel-metadata/
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Ferramentas de teste / lint / typecheck
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+.cache/
+.benchmarks/
+
+# Secrets e credenciais (nunca versionar)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets/
+
+# Sessões e estado local (ebinexpy / bexa)
+.local/
+state/
+*.session
+*.session-journal
+
+# IDE / editores / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# OpenSpec / agentes locais (skills de máquina; não versionar)
+.codex/
+.claude/
+.cursor/
+.grok/
+.agents/
+
+# Logs e temporários
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
