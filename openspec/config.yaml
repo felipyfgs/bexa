@@ -1,24 +1,28 @@
 schema: spec-driven
 
+# Contexto curto para artefatos OpenSpec (alinhar com AGENTS.md).
 context: |
-  Projeto: bexa — app Python sobre ebinexpy para operar a Ebinex.
-  Idioma: pt-BR para respostas ao usuário e artefatos OpenSpec.
-  Stack: Python 3.11+, hatchling, pytest, ruff, dependência ebinexpy.
-  Layout: src/bexa/<feature>/ (core, connection, accounts, market, orders, execution, strategy, risk, bot).
-  Conta padrão: TEST. REAL só com opt-in explícito (BEXA_ALLOW_REAL_TRADING + ClientConfig.allow_real_trading).
-  Robô: bexa run (dry-run default; --live envia). Config mínima no .env (email/senha). Defaults no código.
-  Não reimplementar protocolo Ebinex; estender features em src/bexa e reutilizar EbinexClient.
+  Projeto: bexa — app Python sobre ebinexpy para a sala Ebinex (OPTION).
+  Idioma: pt-BR (usuário + proposal/design/tasks/specs). IDs de change: kebab-case.
+  Stack: Python ≥3.11, hatchling, pytest, ruff; não reimplementar protocolo — usar EbinexClient.
+  Layout: src/bexa/<feature>/ (connection, market, orders, execution, strategy, risk, bot).
+  Conta padrão TEST. REAL só com opt-in (BEXA_ALLOW_REAL_TRADING=YES_REAL_TRADING + ClientConfig).
+  OPTION: envio agora → entrada na vela seguinte → liquidação no fim dessa vela.
+  Corte M1: a partir do segundo 55 CALL/PUT somem (entry_window); wait ≈ 2×TF + buffer.
+  Robô: bexa run dry-run default; --live envia. Segredos só em .env (email/senha).
+  Comandos: pip install -e '.[dev]'; pytest; ruff check src tests.
 
 rules:
   proposal:
     - Escrever em pt-BR
-    - Incluir seção de Não-objetivos
-    - Deixar explícito impacto em TEST vs REAL
+    - Incluir Não-objetivos
+    - Explicitar impacto TEST vs REAL e janela de entrada (corte s:55 no M1)
   design:
     - Escrever em pt-BR
     - Preferir módulos por feature em src/bexa/
+    - Não reinventar ebinexpy/transport
   tasks:
     - Escrever em pt-BR
-    - Quebrar tarefas em passos verificáveis (teste/lint quando couber)
+    - Passos verificáveis (pytest/ruff quando couber)
   specs:
-    - Escrever requisitos e cenários em pt-BR
+    - Requisitos e cenários em pt-BR

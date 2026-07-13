@@ -67,12 +67,17 @@ state/
 Thumbs.db
 Desktop.ini
 
-# OpenSpec / agentes locais (skills de máquina; não versionar)
+# Agentes locais (config de máquina). Skills de projeto versionadas.
 .codex/
 .claude/
 .cursor/
-.grok/
 .agents/
+.grok/*
+!.grok/skills/
+!.grok/skills/**/
+
+# Estudos / clones locais (não versionar)
+_stude/
 
 # Logs e temporários
 *.log

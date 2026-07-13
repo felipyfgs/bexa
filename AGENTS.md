@@ -38,7 +38,8 @@ bexa run --strategy candle_color --live   # envia ordens
 - Layout modular por feature em `src/bexa/<feature>/`.
 - Diffs pequenos e no escopo do pedido; sem refactors laterais.
 - Defaults de config no código (`config.py`); não inventar dezenas de env vars.
-- Trabalho não trivial: preferir OpenSpec (skills em `.codex/skills/`, CLI `openspec`). Detalhes de schema/CLI estão nas skills — não duplicar aqui.
+- Trabalho não trivial: preferir OpenSpec (skills Grok em `.grok/skills/`, CLI `openspec`). Detalhes de schema/CLI estão nas skills — não duplicar aqui.
+  - `/openspec-explore` · `/openspec-propose` · `/openspec-apply-change` · `/openspec-sync-specs` · `/openspec-archive-change`
 - Testes/lint verdes quando o change toca código.
 
 ## Segurança
